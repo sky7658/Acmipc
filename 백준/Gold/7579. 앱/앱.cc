@@ -1,34 +1,32 @@
 #include <iostream>
 using namespace std;
 
-int dp[101][10001];
+int dp[10001][101];
 int n, m;
 pair<int, int> cost[101];
 
 int main(void) {
-    int sum = 0;
+    int min_cost = 0;
     cin >> n >> m;
-    for (int i = 1; i <= n; i++) {
+    for (int i = 0; i < n; i++) {
         cin >> cost[i].first;
     }
-    for (int i = 1; i <= n; i++) {
+    for (int i = 0; i < n; i++) {
         cin >> cost[i].second;
-        sum += cost[i].second;
     }
-    for (int i = 1; i <= n; i++) {
-        for (int j = 0; j <= sum; j++) {
-            if (cost[i].second <= j) {
-                dp[i][j] = max(dp[i - 1][j - cost[i].second] + cost[i].first,
-                               dp[i][j]);
+    while (true) {
+        for (int i = 0; i < n; i++) {
+            if (cost[i].second > min_cost) {
+                dp[min_cost][i] = dp[min_cost][i - 1];
+            } else {
+                dp[min_cost][i] =
+                    max(dp[min_cost - cost[i].second][i - 1] + cost[i].first,
+                        dp[min_cost][i - 1]);
             }
-            dp[i][j] = max(dp[i - 1][j], dp[i][j]);
         }
+        if (dp[min_cost][n - 1] >= m) break;
+        min_cost++;
     }
-    for (int i = 0; i <= sum; i++) {
-        if (dp[n][i] >= m) {
-            cout << i;
-            break;
-        }
-    }
+    cout << min_cost;
     return 0;
 }
