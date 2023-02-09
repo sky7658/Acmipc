@@ -2,8 +2,8 @@
 using namespace std;
 
 int n, m, r, c, d, count = 1;
-int place[51][51];
-bool clear[51][51];
+int place[50][50];
+bool clear[50][50];
 int direction[4][2] = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
 
 int main(void) {
