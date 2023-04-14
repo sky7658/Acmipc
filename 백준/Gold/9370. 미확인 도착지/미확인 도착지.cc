@@ -32,6 +32,9 @@ void Dijkstra(vector<vector<pair<int, int>>> road, int s) {
 }
 
 int main(void) {
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
     cin >> T;
     while (T-- > 0) {
         int hintCost;
