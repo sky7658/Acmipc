@@ -5,30 +5,37 @@ using namespace std;
 
 int n, m, a, b, c;
 long long dist[501];
-vector<pair<pair<int, int>, int>> bus;
+vector<vector<pair<int, int>>> bus(501);
 
-bool Bellman_Ford() {
-    for (int i = 2; i <= n; i++) dist[i] = MAX;
+void Bellman_Ford() {
+    for (int i = 1; i <= n; i++) {
+        if (dist[i] == MAX) continue;
+        for (int j = 0; j < bus[i].size(); j++) {
+            int nextX = bus[i][j].first;
+            int nextW = bus[i][j].second;
 
-    for (int i = 1; i < n; i++) {
-        for (int j = 0; j < bus.size(); j++) {
-            int from = bus[j].first.first;
-            int to = bus[j].first.second;
-            int cost = bus[j].second;
-
-            if (dist[from] == MAX) continue;
-            if (dist[to] <= dist[from] + cost) continue;
-            dist[to] = dist[from] + cost;
+            if (dist[nextX] <= dist[i] + nextW) continue;
+            dist[nextX] = dist[i] + nextW;
         }
     }
+}
 
-    for (int j = 0; j < bus.size(); j++) {
-        int from = bus[j].first.first;
-        int to = bus[j].first.second;
-        int cost = bus[j].second;
+bool Negative_Cycle() {
+    for (int i = 2; i <= n; i++) dist[i] = MAX;
 
-        if (dist[from] == MAX) continue;
-        if (dist[to] > dist[from] + cost) return true;
+    for (int t = 1; t < n; t++) {
+        Bellman_Ford();
+    }
+
+    int copy_dist[501];
+    for (int i = 1; i <= n; i++) {
+        copy_dist[i] = dist[i];
+    }
+
+    Bellman_Ford();
+
+    for (int i = 1; i <= n; i++) {
+        if (copy_dist[i] != dist[i]) return true;
     }
 
     return false;
@@ -39,10 +46,10 @@ int main(void) {
 
     for (int i = 0; i < m; i++) {
         cin >> a >> b >> c;
-        bus.push_back({{a, b}, c});
+        bus[a].push_back({b, c});
     }
 
-    if (Bellman_Ford()) {
+    if (Negative_Cycle()) {
         cout << -1;
     } else {
         for (int i = 2; i <= n; i++) {
