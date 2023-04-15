@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#define MAX 1000000000000
+#define MAX 987654321
 using namespace std;
 
 int n, m, a, b, c;
