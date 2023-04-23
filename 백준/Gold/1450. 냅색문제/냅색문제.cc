@@ -5,10 +5,11 @@ using namespace std;
 
 int n, c;
 int objects[30];
-vector<long long> sumA;
-vector<long long> sumB;
+vector<int> sumA;
+vector<int> sumB;
 
-void dfs(int s, int e, long long sum, vector<long long>& v) {
+void dfs(int s, int e, int sum, vector<int>& v) {
+    if (sum > 1000000000) return;
     if (s >= e) {
         v.push_back(sum);
         return;
@@ -29,7 +30,7 @@ int main(void) {
     sort(sumB.begin(), sumB.end());
 
     int answer = 0;
-    for (long long a : sumA) {
+    for (int a : sumA) {
         answer += upper_bound(sumB.begin(), sumB.end(), c - a) - sumB.begin();
     }
 
