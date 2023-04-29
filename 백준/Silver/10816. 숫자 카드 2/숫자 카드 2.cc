@@ -1,34 +1,24 @@
+#include <algorithm>
 #include <iostream>
-#include <map>
 using namespace std;
-int main(void)
-{
-    ios::sync_with_stdio(false);
+
+int n, m;
+int arr[500000];
+
+int main(void) {
+    ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
 
-    int n, m, num;
-    map<int, int> card;
-
     cin >> n;
-
-    for (int i = 0; i < n; i++)
-    {
-        cin >> num;
-        if (card.find(num) == card.end())
-            card.insert({ num, 1 });
-        else
-            card[num]++;
-    }
+    for (int i = 0; i < n; i++) cin >> arr[i];
+    sort(arr, arr + n);
     cin >> m;
-    for (int i = 0; i < m; i++)
-    {
-        cin >> num;
-        if (card[num])
-            cout << card[num] << ' ';
-        else
-            cout << 0 << ' ';
+    for (int i = 0; i < m; i++) {
+        int f;
+        cin >> f;
+        cout << upper_bound(arr, arr + n, f) - lower_bound(arr, arr + n, f)
+             << ' ';
     }
-
     return 0;
 }
