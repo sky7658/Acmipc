@@ -25,16 +25,8 @@ int main()
 	cin.tie(NULL);
 
 	int snacks[1000000];
-
-	long long sum = 0;
-
 	cin >> m >> n;
-
-	for (int i = 0; i < n; i++)
-	{
-		cin >> snacks[i];
-		sum += snacks[i];
-	}
+	for (int i = 0; i < n; i++) cin >> snacks[i];
 
 	sort(snacks, snacks + n);
 
