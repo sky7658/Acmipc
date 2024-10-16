@@ -1,5 +1,4 @@
 #include <iostream>
-#include <algorithm>
 using namespace std;
 
 int m, n;
@@ -27,8 +26,6 @@ int main()
 	int snacks[1000000];
 	cin >> m >> n;
 	for (int i = 0; i < n; i++) cin >> snacks[i];
-
-	sort(snacks, snacks + n);
 
 	int result = Binary_Search(0, 1000000000, snacks);
 	result = result > 0 ? result - 1 : 0;
