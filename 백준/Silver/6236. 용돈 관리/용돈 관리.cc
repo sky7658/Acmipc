@@ -36,15 +36,9 @@ int main()
 {
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL);
-
 	int days[100000];
-
 	cin >> n >> m;
-
 	for (int i = 0; i < n; i++) cin >> days[i];
-
-	int result = Binary_Search(1, 1000000000, days) + 1;
-	result = result > 0 ? result - 1 : 0;
-	cout << result;
+	cout << Binary_Search(1, 1000000000, days);
 	return 0;
 }
