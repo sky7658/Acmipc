@@ -25,7 +25,7 @@ int main()
 	ios::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 
 	int m, n, l;
-	int hunts[100];
+	int hunts[100000];
 
 	int ans = 0;
 
