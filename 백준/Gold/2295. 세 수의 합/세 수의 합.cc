@@ -10,9 +10,10 @@ bool Binary_Search(int s, int e, int search, vector<int>& a)
 
 	int m = (s + e) / 2;
 
-	if (a[m] == search) return true;
-	else if (a[m] < search) return Binary_Search(m + 1, e, search, a);
-	return Binary_Search(s, m - 1, search, a);
+	if (a[m] < search) return Binary_Search(m + 1, e, search, a);
+	else if (a[m] > search) return Binary_Search(s, m - 1, search, a);
+
+	return true;
 }
 
 int main()
