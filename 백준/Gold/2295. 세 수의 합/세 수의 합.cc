@@ -4,15 +4,15 @@
 
 using namespace std;
 
-int Binary_Search(int s, int e, int search, vector<int> a)
+bool Binary_Search(int s, int e, int search, vector<int>& a)
 {
 	if (s > e) return false;
 
 	int m = (s + e) / 2;
 
-	if (a[m] < search) return Binary_Search(m + 1, e, search, a);
-	else if (a[m] > search) return Binary_Search(s, m - 1, search, a);
-	return true;
+	if (a[m] == search) return true;
+	else if (a[m] < search) return Binary_Search(m + 1, e, search, a);
+	return Binary_Search(s, m - 1, search, a);
 }
 
 int main()
@@ -35,7 +35,7 @@ int main()
 	{
 		for (int j = i; j >= 0; j--)
 		{
-			if (binary_search(sums.begin(), sums.end(), nums[i] - nums[j]))
+			if (Binary_Search(0, sums.size(), nums[i] - nums[j], sums))
 			{
 				cout << nums[i];
 				return 0;
