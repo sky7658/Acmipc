@@ -4,10 +4,8 @@ using namespace std;
 int cnt;
 int n, k;
 
-void Quick_Sort(int a[], int low, int high)
+int Partition(int a[], int low, int high)
 {
-	if (low >= high) return;
-
 	int pivot = high;
 	int i = low - 1;
 
@@ -37,8 +35,16 @@ void Quick_Sort(int a[], int low, int high)
 		}
 	}
 
-	Quick_Sort(a, low, i);
-	Quick_Sort(a, i + 2, high);
+	return i + 1;
+}
+
+void Quick_Sort(int a[], int low, int high)
+{
+	if (low >= high) return;
+
+	int p = Partition(a, low, high);
+	Quick_Sort(a, low, p - 1);
+	Quick_Sort(a, p + 1, high);
 }
 
 int main()
